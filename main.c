@@ -24,11 +24,12 @@ void add_flashcard(flashcards *flashcards) {
   flashcards->amount_of_cards++;
 }
 
-void print_flashcards(const flashcard *flashcards) {
-  const int amount_of_cards = flashcards->amount_of_cards;
-  for (int i = 0; i < amount_of_cards; i++) {
+void print_flashcards(const flashcards *flashcards) {
+  const int amount = flashcards->amount_of_cards;
+  for (int i = 0; i < amount; i++) {
     printf("Question: %s\nAnswer: %s\n", 
-        flashcards.all_cards[i];
+        flashcards->all_flashcards[i].question,
+        flashcards->all_flashcards[i].answer);
   }
 }
 
