@@ -6,9 +6,15 @@ typedef struct Flashcard {
   char answer[200];
 } flashcard;
 
-void add_flashcard(flashcard flashcards[], flashcard *card) {
+void add_flashcard() {
   static int current_flashcard = 0;
-  flashcards[current_flashcard] = *card;
+  flashcard new_flashcard;
+  printf("Question: ");
+  
+  //TODO: scanf cannot read entire lines
+  scanf("%s", new_flashcard.question);
+  printf("Answer: ");
+  scanf("%s", new_flashcard.answer);
 }
 
 void print_flashcards(const flashcard* flashcards) {
@@ -22,13 +28,7 @@ void print_flashcards(const flashcard* flashcards) {
 int main() {
   flashcard flashcards[10];
 
-  flashcard flashcard1 = {
-    .question = "What is the capitol of france?",
-    .answer = "Paris"
-  };
-
-  add_flashcard(flashcards, &flashcard1);
-  print_flashcards(flashcards);
+  add_flashcard();
   
   return EXIT_SUCCESS;
 }
