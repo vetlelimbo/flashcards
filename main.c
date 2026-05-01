@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
+
+enum options {
+  CREATE = 1, QUIT
+};
 
 typedef struct Flashcard {
   char question[100];
@@ -33,11 +38,29 @@ void print_flashcards(const flashcards *flashcards) {
   }
 }
 
+void print_main_menu(void) {
+  puts("---- Main Menu ----\n[1] Create flashcard\n[2] Quit");
+}
+
 int main() {
-  // The falshcards data structure
   flashcards all_cards = {0};
-  add_flashcard(&all_cards);
-  print_flashcards(&all_cards);
+
+  while(true) {
+    int option;
+    print_main_menu();
+    scanf("%d", &option);
+
+    switch(option) {
+      case CREATE:
+        add_flashcard(&all_cards); 
+        print_flashcards(&all_cards);
+        break;
+      case QUIT:
+        break;
+    }
+
+    if (option == QUIT) break;
+  }
 
   return EXIT_SUCCESS;
 }
