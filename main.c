@@ -1,34 +1,42 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct Flashcard {
   char question[100];
   char answer[200];
 } flashcard;
 
-void add_flashcard() {
+typedef struct Flashcards {
+  int amount_of_cards;
+  flashcard all_flashcards[10];
+} flashcards;
+
+void add_flashcard(flashcards *flashcards) {
   static int current_flashcard = 0;
   flashcard new_flashcard;
-  printf("Question: ");
   
   //TODO: scanf cannot read entire lines
-  scanf("%s", new_flashcard.question);
-  printf("Answer: ");
-  scanf("%s", new_flashcard.answer);
+  strcpy(new_flashcard.question, "What is the capitol of france?");
+  strcpy(new_flashcard.answer, "Paris");
+
+  flashcards->all_flashcards[flashcards->amount_of_cards] = new_flashcard;
+  flashcards->amount_of_cards++;
 }
 
-void print_flashcards(const flashcard* flashcards) {
-  for (int i = 0; i < 10; i++) {
+void print_flashcards(const flashcard *flashcards) {
+  const int amount_of_cards = flashcards->amount_of_cards;
+  for (int i = 0; i < amount_of_cards; i++) {
     printf("Question: %s\nAnswer: %s\n", 
-        flashcards[i].question,
-        flashcards[i].answer);
+        flashcards.all_cards[i];
   }
 }
 
 int main() {
-  flashcard flashcards[10];
+  // The falshcards data structure
+  flashcards all_cards = {0};
+  add_flashcard(&all_cards);
+  print_flashcards(&all_cards);
 
-  add_flashcard();
-  
   return EXIT_SUCCESS;
 }
