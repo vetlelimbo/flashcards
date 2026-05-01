@@ -3,8 +3,8 @@
 #include <string.h>
 #include <stdbool.h>
 
-enum options {
-  CREATE = 1, QUIT
+enum options_type {
+  STUDY = 1, CREATE, QUIT
 };
 
 typedef struct Flashcard {
@@ -17,13 +17,13 @@ typedef struct Flashcards {
   flashcard all_flashcards[10];
 } flashcards;
 
-void add_flashcard(flashcards *flashcards) {
+void add_flashcard(flashcards *flashcards, char *question, char *answer) {
   static int current_flashcard = 0;
   flashcard new_flashcard;
   
   //TODO: scanf cannot read entire lines
-  strcpy(new_flashcard.question, "What is the capitol of france?");
-  strcpy(new_flashcard.answer, "Paris");
+  strcpy(new_flashcard.question, question);
+  strcpy(new_flashcard.answer, answer);
 
   flashcards->all_flashcards[flashcards->amount_of_cards] = new_flashcard;
   flashcards->amount_of_cards++;
@@ -38,8 +38,22 @@ void print_flashcards(const flashcards *flashcards) {
   }
 }
 
+//TODO this might be better being a loop over an array of options
+//Not use enums but using an array
 void print_main_menu(void) {
+  puts(---- Main Menu ----\n);
+  for(int i = 0; i < 3; i++) {
+    puts("[%d]") // need to be able to create an array with strings
+  }
   puts("---- Main Menu ----\n[1] Create flashcard\n[2] Quit");
+}
+
+void study_flashcards(flashcards *flashcards) {
+  for(int i = 0; i < flashcards->amount_of_cards; i++) {
+    printf("%s", flashcards->all_flashcards[i].question);
+    scanf("");
+    printf("%s", flashcards->all_flashcards[i].answer);
+  }
 }
 
 int main() {
@@ -51,8 +65,12 @@ int main() {
     scanf("%d", &option);
 
     switch(option) {
+      case STUDY:
+            study_flashcards(&all_cards);
+            break;
       case CREATE:
-        add_flashcard(&all_cards); 
+        add_flashcard(&all_cards, "What is the capitol of france?", "Paris"); 
+        add_flashcard(&all_cards, "What is the mother of all programming languages?", "C"); 
         print_flashcards(&all_cards);
         break;
       case QUIT:
