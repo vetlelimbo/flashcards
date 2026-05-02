@@ -41,11 +41,7 @@ void print_flashcards(const flashcards *flashcards) {
 //TODO this might be better being a loop over an array of options
 //Not use enums but using an array
 void print_main_menu(void) {
-  puts(---- Main Menu ----\n);
-  for(int i = 0; i < 3; i++) {
-    puts("[%d]") // need to be able to create an array with strings
-  }
-  puts("---- Main Menu ----\n[1] Create flashcard\n[2] Quit");
+  puts("---- Main Menu ----\n[1] Study\n[2] Create flashcard\n[3] Quit");
 }
 
 void study_flashcards(flashcards *flashcards) {
