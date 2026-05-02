@@ -45,9 +45,14 @@ void print_main_menu(void) {
 }
 
 void study_flashcards(flashcards *flashcards) {
+  if (flashcards->amount_of_cards == 0) {
+    puts("You have no cards to study at this time.");
+    return
+  }
+
   for(int i = 0; i < flashcards->amount_of_cards; i++) {
     printf("%s", flashcards->all_flashcards[i].question);
-    scanf("");
+    scanf("%c");
     printf("%s", flashcards->all_flashcards[i].answer);
   }
 }
